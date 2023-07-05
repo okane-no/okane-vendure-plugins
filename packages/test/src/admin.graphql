@@ -1,0 +1,135 @@
+mutation CreateShippingMethod($input: CreateShippingMethodInput!) {
+  createShippingMethod(input: $input) {
+    id
+  }
+}
+
+mutation CreateFulfillment($input: FulfillOrderInput!) {
+  addFulfillmentToOrder(input: $input) {
+    ... on Fulfillment {
+      id
+      state
+      method
+    }
+  }
+}
+
+mutation CreateFulfillment($input: FulfillOrderInput!) {
+  addFulfillmentToOrder(input: $input) {
+    ... on Fulfillment {
+      id
+      state
+      method
+    }
+  }
+}
+
+mutation CreateCollection($input: CreateCollectionInput!) {
+  createCollection(input: $input) {
+    id
+    createdAt
+    updatedAt
+    name
+    slug
+  }
+}
+
+query order($id: ID!) {
+  order(id: $id) {
+    id
+    code
+    state
+    totalWithTax
+    shippingWithTax
+    fulfillments {
+      id
+      state
+      method
+      trackingCode
+      customFields
+    }
+  }
+}
+
+query orders {
+  orders {
+    items {
+      id
+      code
+      lines {
+        id
+        quantity
+        productVariant {
+          product {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation createPaymentMethod($input: CreatePaymentMethodInput!) {
+  createPaymentMethod(input: $input) {
+    id
+    code
+    name
+    description
+    enabled
+  }
+}
+
+mutation UpdateProductVariants($input: [UpdateProductVariantInput!]!) {
+  updateProductVariants(input: $input) {
+    id
+    createdAt
+    updatedAt
+    enabled
+    languageCode
+    name
+    sku
+    price
+    currencyCode
+    priceWithTax
+    stockAllocated
+    stockOnHand
+    trackInventory
+    outOfStockThreshold
+    __typename
+  }
+}
+
+mutation UpdateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
+    id
+    enabled
+    __typename
+  }
+}
+
+query GetVariants {
+  productVariants {
+    items {
+      name
+      id
+      sku
+      stockOnHand
+      price
+      priceWithTax
+      outOfStockThreshold
+      trackInventory
+      stockAllocated
+    }
+    totalItems
+  }
+}
+
+mutation CreatePromotion($input: CreatePromotionInput!) {
+  createPromotion(input: $input) {
+    ... on Promotion {
+      id
+      name
+      couponCode
+    }
+  }
+}

@@ -1,0 +1,95 @@
+fragment OrderFields on Order {
+  id
+  code
+  state
+  active
+  total
+  totalWithTax
+  customer {
+    emailAddress
+  }
+  shippingAddress {
+    fullName
+  }
+  lines {
+    id
+    quantity
+    productVariant {
+      id
+    }
+    discounts {
+      adjustmentSource
+      amount
+      amountWithTax
+      description
+      type
+    }
+  }
+}
+
+mutation AddItemToOrder($productVariantId: ID!, $quantity: Int!) {
+  addItemToOrder(productVariantId: $productVariantId, quantity: $quantity) {
+    ... on Order {
+      ...OrderFields
+    }
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+
+mutation ApplyCouponCode($couponCode: String!) {
+  applyCouponCode(couponCode: $couponCode) {
+    ... on Order {
+      ...OrderFields
+    }
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+
+mutation SetShippingAddress($input: CreateAddressInput!) {
+  setOrderShippingAddress(input: $input) {
+    ... on Order {
+      id
+      code
+    }
+  }
+}
+
+mutation SetShippingMethod($id: ID!) {
+  setOrderShippingMethod(shippingMethodId: $id) {
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
+
+mutation TransitionToState($state: String!) {
+  transitionOrderToState(state: $state) {
+    ... on OrderStateTransitionError {
+      errorCode
+      message
+      transitionError
+    }
+  }
+}
+
+mutation AddPaymentToOrder($input: PaymentInput!) {
+  addPaymentToOrder(input: $input) {
+    ... on Order {
+      id
+      code
+      state
+      shippingWithTax
+    }
+    ... on ErrorResult {
+      errorCode
+      message
+    }
+  }
+}
