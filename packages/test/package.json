@@ -9,5 +9,8 @@
     "@vendure/core": "^2.0.3",
     "@vendure/testing": "^2.0.3",
     "graphql-tag": "^2.12.6"
+  },
+  "scripts": {
+    "generate": "graphql-codegen --config codegen.yml"
   }
 }
