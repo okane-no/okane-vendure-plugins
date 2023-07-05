@@ -1,11 +1,4 @@
 {
-  "name": "root",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "husky": "^8.0.3",
-    "lerna": "^6.6.2"
-  }
+  "name": "okane-vendure-plugins",
+  "packageManager": "yarn@3.6.1"
 }
