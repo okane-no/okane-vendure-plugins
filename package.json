@@ -2,6 +2,8 @@
   "name": "okane-vendure-plugins",
   "packageManager": "yarn@3.6.1",
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "husky": "^8.0.0",
     "pinst": "^3.0.0"
   },
@@ -9,6 +11,6 @@
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "test": ""
+    "lint:fix": ""
   }
 }
